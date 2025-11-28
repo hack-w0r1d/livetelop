@@ -3,52 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PiPテロップサンプル</title>
+<title>CSSアニメーションを動画化サンプル</title>
 <style>
-body {
-  margin: 0;
-  background: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-/* 動画のサイズをある程度大きくしてPiPボタンを出す */
-#pipVideo {
-  width: 300px;
-  height: 50px;
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  background: transparent;
-}
+  body {
+    margin: 0;
+    background: black;
+  }
+  #marquee {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    white-space: nowrap;
+    color: yellow;
+    font-size: 48px;
+    font-weight: bold;
+  }
 </style>
 </head>
 <body>
-
-<!-- テロップ動画（ここではサンプル動画として花ではなくテロップ用の簡易動画を使用） -->
-<video id="pipVideo" autoplay muted loop playsinline controls>
-  <source src="https://media.githubusercontent.com/media/yumekiti/pip-marquee-sample/main/scrolling-marquee.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<canvas id="canvas" width="800" height="100"></canvas>
+<div id="marquee">⚡ これはテロップ動画化サンプルです！ ⚡</div>
+<button id="startBtn">動画化開始</button>
 
 <script>
-const video = document.getElementById('pipVideo');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d', { alpha: false });
+const marquee = document.getElementById('marquee');
+const startBtn = document.getElementById('startBtn');
 
-// PiPボタンをクリックして切り替え（iOS Safariでユーザー操作必須）
-video.addEventListener('click', async () => {
-  try {
-    if (!document.pictureInPictureElement) {
-      await video.requestPictureInPicture();
-    } else {
-      await document.exitPictureInPicture();
+startBtn.addEventListener('click', async () => {
+  // MediaRecorder用にcanvasをストリーム化
+  const stream = canvas.captureStream(60); // 60fps
+  const recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+  const chunks = [];
+
+  recorder.ondataavailable = e => chunks.push(e.data);
+  recorder.onstop = e => {
+    const blob = new Blob(chunks, { type: 'video/webm' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'marquee_video.webm';
+    a.textContent = '動画をダウンロード';
+    document.body.appendChild(a);
+  };
+
+  recorder.start();
+
+  let x = canvas.width;
+  const speed = 2; // 横スクロール速度
+  const text = marquee.textContent;
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'yellow';
+    ctx.font = '48px sans-serif';
+    ctx.fillText(text, x, 70); // 70pxくらいで縦中央に
+    x -= speed;
+    if (x < -ctx.measureText(text).width) {
+      x = canvas.width;
     }
-  } catch (err) {
-    console.error(err);
   }
+
+  let frames = 0;
+  const totalFrames = 60 * 10; // 10秒動画
+  function loop() {
+    draw();
+    frames++;
+    if (frames < totalFrames) {
+      requestAnimationFrame(loop);
+    } else {
+      recorder.stop();
+    }
+  }
+
+  loop();
 });
 </script>
-
 </body>
 </html>
