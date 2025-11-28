@@ -3,26 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSSアニメーションを動画化サンプル</title>
+<title>ループ再生テロップ動画サンプル</title>
 <style>
   body {
     margin: 0;
     background: black;
-  }
-  #marquee {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    white-space: nowrap;
-    color: yellow;
-    font-size: 48px;
-    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 </style>
 </head>
 <body>
-<canvas id="canvas" width="800" height="100"></canvas>
-<div id="marquee">⚡ これはテロップ動画化サンプルです！ ⚡</div>
+
+<!-- ここに動画を表示 -->
+<video id="pipVideo" autoplay muted loop playsinline controls style="width:800px; height:100px; margin-bottom:10px;"></video>
+
+<!-- Canvasで動画生成 -->
+<canvas id="canvas" width="800" height="100" style="display:none;"></canvas>
+<div id="marquee">⚡ これはループ再生テロップ動画サンプルです！ ⚡</div>
 <button id="startBtn">動画化開始</button>
 
 <script>
@@ -30,9 +29,9 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d', { alpha: false });
 const marquee = document.getElementById('marquee');
 const startBtn = document.getElementById('startBtn');
+const video = document.getElementById('pipVideo');
 
-startBtn.addEventListener('click', async () => {
-  // MediaRecorder用にcanvasをストリーム化
+startBtn.addEventListener('click', () => {
   const stream = canvas.captureStream(60); // 60fps
   const recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
   const chunks = [];
@@ -41,6 +40,12 @@ startBtn.addEventListener('click', async () => {
   recorder.onstop = e => {
     const blob = new Blob(chunks, { type: 'video/webm' });
     const url = URL.createObjectURL(blob);
+
+    // videoタグに読み込んで自動ループ再生
+    video.src = url;
+    video.play();
+
+    // ダウンロードリンクも作る
     const a = document.createElement('a');
     a.href = url;
     a.download = 'marquee_video.webm';
@@ -60,11 +65,9 @@ startBtn.addEventListener('click', async () => {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'yellow';
     ctx.font = '48px sans-serif';
-    ctx.fillText(text, x, 70); // 70pxくらいで縦中央に
+    ctx.fillText(text, x, 70);
     x -= speed;
-    if (x < -ctx.measureText(text).width) {
-      x = canvas.width;
-    }
+    if (x < -ctx.measureText(text).width) x = canvas.width;
   }
 
   let frames = 0;
@@ -72,15 +75,13 @@ startBtn.addEventListener('click', async () => {
   function loop() {
     draw();
     frames++;
-    if (frames < totalFrames) {
-      requestAnimationFrame(loop);
-    } else {
-      recorder.stop();
-    }
+    if (frames < totalFrames) requestAnimationFrame(loop);
+    else recorder.stop();
   }
 
   loop();
 });
 </script>
+
 </body>
 </html>
