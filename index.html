@@ -21,7 +21,7 @@
 
 <!-- Canvasで動画生成 -->
 <canvas id="canvas" width="800" height="100" style="display:none;"></canvas>
-<div id="marquee"> これはループ再生テロップ動画のサンプルです！ </div>
+<div id="marquee"> 12月もよろしくお願いします🎄 </div>
 <button id="startBtn">動画化開始</button>
 
 <script>
@@ -56,7 +56,7 @@ startBtn.addEventListener('click', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'orange';
+    ctx.fillStyle = 'blue';
     ctx.font = '48px sans-serif';
     ctx.fillText(text, x, 70);
     x -= speed;
