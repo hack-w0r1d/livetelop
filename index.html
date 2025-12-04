@@ -21,7 +21,7 @@
 
 <!-- Canvasで動画生成 -->
 <canvas id="canvas" width="800" height="100" style="display:none;"></canvas>
-<div id="marquee"> 天界の塔31〜34層周回中‪𓂃 𓈒𓏸໒꒱ </div>
+<div id="marquee"> 天界の塔31〜34層周回中 </div>
 <button id="startBtn">動画化開始</button>
 
 <script>
@@ -51,6 +51,8 @@ startBtn.addEventListener('click', () => {
   let x = canvas.width;
   const speed = 2; // 横スクロール速度
   const text = marquee.textContent;
+  ctx.font = '48px sans-serif';
+  const textWidth = ctx.measureText(text).width;
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -60,18 +62,16 @@ startBtn.addEventListener('click', () => {
     ctx.font = '48px sans-serif';
     ctx.fillText(text, x, 70);
     x -= speed;
-    if (x < -ctx.measureText(text).width) x = canvas.width;
   }
 
-  let frames = 0;
-  const totalFrames = 60 * 10; // 10秒動画
   function loop() {
     draw();
-    frames++;
-    if (frames < totalFrames) requestAnimationFrame(loop);
-    else recorder.stop();
+    if (x < -textWidth) {
+      recorder.stop();
+      return;
+    }
+    requestAnimationFrame(loop);
   }
-
   loop();
 });
 </script>
