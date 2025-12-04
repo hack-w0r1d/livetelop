@@ -4,7 +4,7 @@ const startBtn = document.getElementById('createTelopBtn');
 const video = document.getElementById('pipVideo');
 const pipBtn = document.getElementById('pipBtn');
 const preview = document.getElementById("telopPreview");
-let telopText = "ここにお知らせや注意事項を書いてテロップとして流すことができます。";
+let telopText = "テロップ作成ボタンを押すとこちらの文章がテロップとして作成されます。テロップの内容は上記のフォームから入力して更新することができます。";
 
 pipBtn.addEventListener('click', async () => {
     try {

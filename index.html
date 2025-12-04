@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ループ再生テロップ動画サンプル</title>
+    <title>LiveTelop Maker</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
@@ -11,12 +11,15 @@
     <!-- ここに動画を表示 -->
     <video id="pipVideo" autoplay muted loop playsinline controls></video>
 
-    <input type="text" id="telopInput" placeholder="テロップにしたい文字を入力">
+    <input type="text" id="telopInput" placeholder="テロップにしたい文章を入力">
     <button id="updateTelopBtn">テロップ更新</button>
 
     <!-- Canvasで動画生成 -->
     <canvas id="canvas" width="800" height="100"></canvas>
-    <div id="telopPreview">ここにお知らせや注意事項を書いてテロップとして流すことができます。</div>
+    <div id="telopPreview">
+      テロップ作成ボタンを押すとこちらの文章がテロップとして作成されます。<br>
+      テロップの内容は上記のフォームから入力して更新することができます。
+    </div>
     <button id="createTelopBtn">テロップ作成</button>
     <button id="pipBtn">テロップ使用</button>
     <script src="script.js"></script>
