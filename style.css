@@ -79,12 +79,6 @@ canvas {
     background-color: #e6003e;
 }
 
-#telopPreview {
-    width: 90%;
-    text-align: center;
-    margin: 10px auto 0;
-}
-
 #createTelopBtn {
     background-color: #2ecc71;
 }
@@ -95,13 +89,6 @@ canvas {
 
 #createTelopBtn:active {
     background-color: #219150;
-}
-
-.notes {
-    width: 84%;
-    margin: 10px auto;
-    padding: 0 8%;
-    text-align: left;
 }
 
 #pipBtn {
