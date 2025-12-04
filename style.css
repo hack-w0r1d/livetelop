@@ -71,8 +71,7 @@ canvas {
 #telopPreview {
     width: 90%;
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px auto;
 }
 
 #createTelopBtn {
@@ -91,7 +90,7 @@ canvas {
 
 .notes {
     width: 84%;
-    margin: 10px 0;
+    margin: 10px auto;
     padding: 0 8%;
     text-align: left;
 }
@@ -112,5 +111,5 @@ canvas {
 
 .explain {
     width: 90%;
-    margin: 10px 0;
+    margin: 10px auto;
 }
