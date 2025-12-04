@@ -55,7 +55,7 @@ startBtn.addEventListener('click', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'skyblue';
     ctx.fillText(text, x, 70);
     x -= speed;
     }
