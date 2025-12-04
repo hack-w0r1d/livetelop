@@ -7,6 +7,12 @@ body {
     align-items: center;
 }
 
+#main-container {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
 h1 {
     margin: 30px 0;
 }
@@ -41,7 +47,7 @@ canvas {
 }
 
 #telopInput {
-    width: 90%;
+    width: 88%;
     height: 30px;
     max-width: 777px;
     margin-top: 10px;
@@ -63,8 +69,7 @@ canvas {
 }
 
 #telopPreview {
-    color: white;
-    width: 90%;
+    width: 100%;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -84,9 +89,11 @@ canvas {
     background-color: #219150;
 }
 
-#notes {
-    width: 90%;
+.notes {
+    width: 84%;
     margin: 10px 0;
+    padding: 0 8%;
+    text-align: left;
 }
 
 #pipBtn {
@@ -101,4 +108,8 @@ canvas {
 
 #pipBtn:active {
     background-color: #0b5ed7;
+}
+
+.explain {
+    margin: 10px 0;
 }
