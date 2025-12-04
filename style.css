@@ -19,8 +19,14 @@ canvas {
 }
 
 #telopInput {
-    width: 100%;
+    width: 90%;
     max-width: 777px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#applyTelop {
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
@@ -29,6 +35,17 @@ canvas {
     width: 100%;
     text-align: center;
     margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#startBtn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#pipBtn {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* #pipBtn {

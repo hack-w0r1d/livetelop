@@ -38,6 +38,7 @@ startBtn.addEventListener('click', () => {
     const blob = new Blob(chunks, { type: 'video/webm' });
 
     // videoタグに読み込んで自動ループ再生
+    if (video.src) URL.revokeObjectURL(video.src);
     video.src = URL.createObjectURL(blob);
     video.play();
     };
