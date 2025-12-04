@@ -84,6 +84,10 @@ canvas {
     background-color: #219150;
 }
 
+#notes {
+    margin: 10px 0;
+}
+
 #pipBtn {
     background-color: #1e90ff;
     margin-top: 10px;
