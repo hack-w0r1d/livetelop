@@ -16,22 +16,6 @@ bgPicker.addEventListener('change', updateBgColor);
 textPicker.addEventListener('input', updateTextColor);
 textPicker.addEventListener('change', updateTextColor);
 
-// bgPicker.addEventListener('input', () => {
-//     telopPreview.style.backgroundColor = bgPicker.value;
-// });
-
-// bgPicker.addEventListener('input', () => {
-//     telopPreview.style.backgroundColor = bgPicker.value;
-// });
-
-// textPicker.addEventListener('change', () => {
-//     telopPreview.style.color = textPicker.value;
-// });
-
-// textPicker.addEventListener('change', () => {
-//     telopPreview.style.color = textPicker.value;
-// });
-
 pipBtn.addEventListener('click', async () => {
     try {
         if (!document.pictureInPictureElement) {
